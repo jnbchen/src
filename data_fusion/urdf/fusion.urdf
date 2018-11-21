@@ -52,24 +52,6 @@
       <material name="black"/>  
     </visual>  
   </link>
-
-
-  <link name="velodyne"/>
-  <link name="ibeo"/>
-
-  <joint name="lidar_ibeo" type="continuous">
-    <parent link="vehicle"/>
-    <child link="ibeo"/>
-    <origin xyz="0 0 0 " rpy = "0 0 0"/>
-  </joint>
-
-  <joint name="lidar_velo" type="continuous">
-    <parent link="vehicle"/>
-    <child link="velodyne"/>
-    <origin xyz="1.88 0 2.166 " rpy = "0 0 0"/>
-  </joint>
-
-
   
   <joint name="joint_base_wheel1" type="fixed">  
     <parent link="vehicle"/>  
@@ -89,6 +71,61 @@
   <joint name="joint_base_wheel4" type="fixed">  
     <parent link="vehicle"/>  
     <child link="wheel_4"/>  
+  </joint>
+
+
+  <link name="velodyne"/>
+  <link name="ibeo"/>
+
+  <joint name="lidar_ibeo" type="continuous">
+    <parent link="vehicle"/>
+    <child link="ibeo"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
+  </joint>
+
+  <joint name="lidar_velo" type="continuous">
+    <parent link="vehicle"/>
+    <child link="velodyne"/>
+    <origin xyz="1.88 0 2.166 " rpy = "0 0 0"/>
+  </joint>
+
+
+
+  <link name="ContiSSR208_0">
+  <link name="ContiSSR208_1">
+  <link name="ContiSSR208_2">
+  <link name="ContiSSR208_3">
+  <link name="ContiARS408">
+  
+
+  <joint name="radar0" type="continuous">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_0"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
+  </joint>
+
+  <joint name="radar1" type="continuous">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_1"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
+  </joint>
+
+  <joint name="radar2" type="continuous">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_2"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
+  </joint>
+
+  <joint name="radar3" type="continuous">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_3"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
+  </joint>
+
+  <joint name="radar" type="continuous">
+    <parent link="vehicle"/>
+    <child link="ContiARS408"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
   </joint>
   
 </robot>  

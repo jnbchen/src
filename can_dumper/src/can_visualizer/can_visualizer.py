@@ -31,7 +31,7 @@ class can_visualizer(object):
         self.pub_ = rospy.Publisher('/can_dumper_node/can_visualization', Marker, queue_size=20)
 
     def callback(self, msg):
-        self.marker_array_.markers[:] = []
+        #self.marker_array_.markers[:] = []
         rate = rospy.Rate(30)
         for i in len(msg.radar_array):
             track = msg.radar_array[i]
