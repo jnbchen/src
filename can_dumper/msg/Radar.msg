@@ -23,4 +23,10 @@ float32 object_size_y
 
 float32 angle
 
+string  name
+float32  r
+float32  g
+float32  b
+float32  a
+
 

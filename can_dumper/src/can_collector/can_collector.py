@@ -11,7 +11,6 @@ class can_collector(object):
         self.listener = {}
         self.parser = {}
         self.radar_array_ = RadarArray()
-        self.radar_array_.header.frame_id = 'radar'
         self.radar_ = Radar()
         self.routelist = []
         self.buffer_ = {}
@@ -93,6 +92,8 @@ class can_collector(object):
             self.radar_.relative_velocity_x = r['Track_VrelLat']
             self.radar_.relative_velocity_y = r['Track_VrelLong']
 
+            self.radar_array_.header.stamp = rospy.get_rostime()
+            self.radar_array_.header.frame_id = 'radar'
             self.radar_array_.radar_array.append(self.radar_)
             # print('SSR')
         
@@ -110,17 +111,35 @@ class can_collector(object):
                 self.radar_.distance_y = self.buffer_[id]['Obj_DistLong']
                 self.radar_.relative_velocity_x = self.buffer_[id]['Obj_VrelLat']
                 self.radar_.relative_velocity_y = self.buffer_[id]['Obj_VrelLong']
-                self.radar_.classification = self.buffer_[id]['Obj_Class']
                 self.radar_.object_size.x = self.buffer_[id]['Obj_Width']
                 self.radar_.object_size.y = self.buffer_[id]['Obj_Length']
                 self.radar_.angle = self.buffer_[id]['Obj_OrientationAngle']
+
+                var = self.buffer_[id]['Obj_Class']
+                self.radar_.classification = var
+                self.radar_.name = self.switch(var).get('name')
+                self.radar_.r = self.switch(var).get('r')
+                self.radar_.g = self.switch(var).get('g')
+                self.radar_.b = self.switch(var).get('b')
+                self.radar_.a = self.switch(var).get('a')
             
+                self.radar_array_.header.stamp = rospy.get_rostime()
+                self.radar_array_.header.frame_id = 'radar'
                 self.radar_array_.radar_array.append(self.radar_)
                 
+    def switch(self, var):
+        return {
+                self.radar_.POINTS: {'name':'POINTS','r':1.0,'g':1.0,'b':1.0,'a':1.0},
+                self.radar_.CAR: {'name':'CAR','r':0.0,'g':0.0,'b':1.0,'a':1.0},
+                self.radar_.TRUCK: {'name':'TRUCK','r':1.0,'g':0.0,'b':1.0,'a':1.0},
+                self.radar_.PEDESTRIAN: {'name':'PEDESTRIAN','r':1.0,'g':0.0,'b':0.0,'a':1.0},
+                self.radar_.MOTORCYCLE: {'name':'MOTORCYCLE','r':0.0,'g':1.0,'b':1.0,'a':1.0},
+                self.radar_.BICYCLE: {'name':'BICYCLE','r':1.0,'g':1.0,'b':0.0,'a':1.0},
+                self.radar_.WIDE: {'name':'WIDE','r':1.0,'g':0.0,'b':1.0,'a':1.0}
+        }.get(var,'error')
+
     def broadcast(self, args=None):
         if self.topic_:
-            self.radar_array_.header.stamp = rospy.get_rostime()
-            self.radar_array_.header.frame_id = 'radar'
             self.pub_.publish(self.radar_array_)
             
         self.radar_array_.radar_array[:] = []
