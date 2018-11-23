@@ -8,7 +8,6 @@
     <param name="collect_interval" value="5" />
     <param name="broadcast_time" value="50" />
     <param name="device_config_file" value="$(find can_dumper)/config/device.conf" />
-    <param name="data_storage_path" value="/home/master/workspace_jinbo/data" />
   </node>
 
   <node pkg="can_dumper" type="can_dumper_vis" name="can_dumper_vis" output="screen"/>

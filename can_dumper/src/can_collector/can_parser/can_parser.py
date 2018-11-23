@@ -13,28 +13,15 @@ class can_parser(object):
 
     def get_filter(self, channel):
         filter_list = []
-        filter_dict = {}
         if channel == 'can0':
-            filter_dict['can_id'] = 0x60B
-            filter_dict['can_mask'] = 0xFFF
-            filter_dict['extended'] = False
-            filter_list.append(filter_dict)
-            filter_dict['can_id'] = 0x60D
-            filter_list.append(filter_dict)
+            filter_list = [{'can_id':0x60B,'can_mask':0xFFF,'extended':False}, \
+                           {'can_id':0x60D,'can_mask':0xFFF,'extended':False}]
         elif channel == 'can1':
-            filter_dict['can_id'] = 0x60C
-            filter_dict['can_mask'] = 0xFFF
-            filter_dict['extended'] = False
-            filter_list.append(filter_dict)
-            filter_dict['can_id'] = 0x61C
-            filter_list.append(filter_dict)
+            filter_list = [{'can_id':0x60C,'can_mask':0xFFF,'extended':False}, \
+                           {'can_id':0x61C,'can_mask':0xFFF,'extended':False}]
         elif channel == 'can2':
-            filter_dict['can_id'] = 0x62C
-            filter_dict['can_mask'] = 0xFFF
-            filter_dict['extended'] = False
-            filter_list.append(filter_dict)
-            filter_dict['can_id'] = 0x63C
-            filter_list.append(filter_dict)
+            filter_list = [{'can_id':0x62C,'can_mask':0xFFF,'extended':False}, \
+                           {'can_id':0x63C,'can_mask':0xFFF,'extended':False}]
 
         return filter_list
 

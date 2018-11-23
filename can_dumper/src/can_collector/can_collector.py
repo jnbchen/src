@@ -82,6 +82,7 @@ class can_collector(object):
             self.routelist[:] = []
 
     def assign(self, r):
+        #print(r['id'])
         if (r['channel'] == 'can1' or r['channel'] == 'can2'):
             device = str((r['id']&0x0F0)>>4)
             self.radar_.id = r['Track_ID']
@@ -96,7 +97,6 @@ class can_collector(object):
             self.radar_array_.header.frame_id = 'radar'
             self.radar_array_.radar_array.append(self.radar_)
 
-            print('device: %d, id: %d') %(device, self.radar_.id) 
             # print('SSR')
         
         elif r['channel'] == 'can0':

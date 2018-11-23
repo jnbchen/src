@@ -8,9 +8,7 @@
   <arg name="gui" default="True" />
 
   <!-- node for ibeo_had -->
-  <include file="$(find ibeo_had)/launch/ecu_listener.launch" >
-    <arg name="filename" value="$(arg filename)" />
-  </include>
+  <include file="$(find ibeo_had)/launch/ecu_listener.launch" />
 
   <node pkg="rosbag" type="record" name="ibeo_record"
     args="record -o $(arg storage_path)
