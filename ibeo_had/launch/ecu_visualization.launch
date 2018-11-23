@@ -12,11 +12,6 @@
     <arg name="filename" value="$(arg filename)" />
   </include>
 
-
-  <include file="$(find ibeo_had)/launch/visualizer.launch" >
-    <arg name="filename" value="$(arg filename)" />
-  </include>
-
   <node pkg="rosbag" type="record" name="ibeo_record"
     args="record -o $(arg storage_path)
                     /ibeo_listener/ibeo_points

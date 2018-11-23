@@ -13,10 +13,6 @@
     <arg name="filename" value="$(arg filename)" />
   </include>
 
-
-  <include file="$(find ibeo_had)/launch/visualizer.launch" >
-  </include>
-
   <param name="robot_description" textfile="$(find ibeo_had)/urdf/vehicle.urdf" />
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="$(arg gui)"/> 

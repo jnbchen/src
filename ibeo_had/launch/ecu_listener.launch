@@ -8,11 +8,22 @@
   <arg name="ibeo_had_port" default="12002"/>
   <arg name="rate" default="20" />
 
+  <arg name="sub_topic" default="/ibeo_listener/ibeo_objects" />
+  <arg name="text_size" default="1" />
+  <arg name="box_size" default="0.2" />
+
   <!-- node for HAD -->
   <node pkg="ibeo_had" type="ibeo_had_ecu" name="ibeo_listener">
     <param name="ibeo_had_ip" value="$(arg ibeo_had_ip)" />
     <param name="ibeo_had_port" value="$(arg ibeo_had_port)" />
     <param name="rate" value="$(arg rate)" />
+  </node>
+
+  <node pkg="ibeo_had" type="ibeo_had_visualizer" name="ibeo_visualizer" output="screen">
+    <param name="rate" value="$(arg rate)"/>
+    <param name="sub_topic" value="$(arg sub_topic)"/>
+    <param name="text_size" value="$(arg text_size)"/>
+    <param name="box_size" value="$(arg box_size)"/>
   </node>
 
 </launch>

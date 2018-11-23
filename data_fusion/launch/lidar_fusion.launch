@@ -6,10 +6,10 @@
   <!-- declare arguments with default values -->
   <arg name="filename" default="/media/jinbo/Work/Data_set/ibeo/20181105-140951.idc"/>
   <arg name="model"/> 
-  <arg name="gui" default="True" /> 
+  <arg name="gui" default="False" /> 
 
   <!-- node for can dumper -->
-  <!--<include file="$(find can_dumper)/six_channels.launch" />-->
+  <include file="$(find can_dumper)/launch/six_channels.launch" />
 
   <!-- node for velodyne -->
   <include file="$(find velodyne_pointcloud)/launch/64e_points.launch" />
@@ -18,8 +18,6 @@
   <include file="$(find ibeo_had)/launch/idc_parser.launch" >
     <arg name="filename" value="$(arg filename)" />
   </include>
-
-  <include file="$(find ibeo_had)/launch/visualizer.launch" />
 
 
   <param name="robot_description" textfile="$(find data_fusion)/urdf/fusion.urdf" />

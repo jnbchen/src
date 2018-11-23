@@ -105,9 +105,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES can_dumper
-#  CATKIN_DEPENDS
-#  message_runtime
-#  std_msgs
+#  CATKIN_DEPENDS rospy std_msgs uether_cam
 #  DEPENDS system_lib
 )
 
@@ -135,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_visualization src/visualization.cpp)
+# add_executable(${PROJECT_NAME}_node src/can_dumper_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -145,11 +143,11 @@ include_directories(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-## add_dependencies(${PROJECT_NAME}_visualization ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_visualization
-#  ${catkin_LIBRARIES}
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
 # )
 
 #############
@@ -163,6 +161,11 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 install(PROGRAMS
     nodes/can_dumper_node
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  )
+
+install(PROGRAMS
+    nodes/can_dumper_vis
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   )
 

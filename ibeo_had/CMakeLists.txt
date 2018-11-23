@@ -115,10 +115,10 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES ibeo_had
-  CATKIN_DEPENDS # pcl_conversions pcl_ros roscpp sensor_msgs 
-  message_runtime
-  std_msgs
+   LIBRARIES ibeo_had
+   CATKIN_DEPENDS # pcl_conversions pcl_ros roscpp sensor_msgs 
+   message_runtime
+   std_msgs
 #  DEPENDS system_lib
 )
 
@@ -218,11 +218,14 @@ target_link_libraries(${PROJECT_NAME}_visualizer
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+#install(FILES
+#  launch/ecu_listener.launch
+#  launch/idc_parser.launch
+#  launch/visualizer.launch
+#  launch/ecu_visualization.launch
+#  launch/idc_visualization.launch
+#  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+#)
 
 #############
 ## Testing ##

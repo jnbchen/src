@@ -6,6 +6,8 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Marker1
+        - /Marker1/Namespaces1
       Splitter Ratio: 0.5
     Tree Height: 973
   - Class: rviz/Selection
@@ -60,12 +62,12 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 4.07999992
+      Max Intensity: 4.79999971
       Min Color: 0; 0; 0
-      Min Intensity: 0.399999976
+      Min Intensity: 0.0799999982
       Name: PointCloud2
       Position Transformer: XYZ
       Queue Size: 10
@@ -77,17 +79,37 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
       Enabled: true
       Links:
         All Links Enabled: true
+        ContiARS408:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        ContiSSR208_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        ContiSSR208_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        ContiSSR208_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        ContiSSR208_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        Link Tree Style: ""
+        Link Tree Style: Links in Alphabetic Order
         ibeo:
           Alpha: 1
           Show Axes: false
@@ -128,14 +150,13 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /ibeo_visualizer/ibeo_class
       Name: MarkerArray
       Namespaces:
-        box: true
-        class: true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -148,12 +169,12 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 255
       Min Color: 0; 0; 0
-      Min Intensity: 6.49703979
+      Min Intensity: 5.1499939
       Name: PointCloud2
       Position Transformer: XYZ
       Queue Size: 10
@@ -165,6 +186,15 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
+      Value: false
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /can_dumper_node/can_track
+      Name: Marker
+      Namespaces:
+        ContiSSR208_1: true
+        ContiSSR208_3: true
+      Queue Size: 100
       Value: true
   Enabled: true
   Global Options:
@@ -191,7 +221,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 80.3475494
+      Distance: 114.221954
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -206,10 +236,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.985399246
+      Pitch: 0.945399284
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.57039499
+      Yaw: 3.21539307
     Saved: ~
 Window Geometry:
   Displays:

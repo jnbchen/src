@@ -1,19 +1,10 @@
 #!/usr/bin/env python
 
-import rospy
-import can_collector
+import can_collector, rospy
 
-# global dumper
 
 if __name__ == '__main__':
     rospy.init_node('can_dumper_node')
 
-    try:
-    	dumper = can_collector.can_collector()
-    	dumper.start()
-
-    	visualizer = can_visualizer.can_visualizer()
-	visualizer.start()
-    
-    except rospy.ROSInterruptException:
-        pass
+    dumper = can_collector.can_collector()
+    dumper.start()

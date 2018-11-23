@@ -6,7 +6,7 @@ uint8 MOTORCYCLE=4
 uint8 BICYCLE=5
 uint8 WIDE=6
 
-uint8 id
+uint32 id
 uint8 classification
 
 string radar_type

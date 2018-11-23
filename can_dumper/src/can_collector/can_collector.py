@@ -95,6 +95,8 @@ class can_collector(object):
             self.radar_array_.header.stamp = rospy.get_rostime()
             self.radar_array_.header.frame_id = 'radar'
             self.radar_array_.radar_array.append(self.radar_)
+
+            print('device: %d, id: %d') %(device, self.radar_.id) 
             # print('SSR')
         
         elif r['channel'] == 'can0':
@@ -114,6 +116,8 @@ class can_collector(object):
                 self.radar_.object_size.x = self.buffer_[id]['Obj_Width']
                 self.radar_.object_size.y = self.buffer_[id]['Obj_Length']
                 self.radar_.angle = self.buffer_[id]['Obj_OrientationAngle']
+
+                print('device: ARS, id: %d') %(self.radar_.id) 
 
                 var = self.buffer_[id]['Obj_Class']
                 self.radar_.classification = var

@@ -8,11 +8,9 @@
     <param name="collect_interval" value="5" />
     <param name="broadcast_time" value="50" />
     <param name="device_config_file" value="$(find can_dumper)/config/device.conf" />
+    <param name="data_storage_path" value="/home/master/workspace_jinbo/data" />
   </node>
 
-  <node pkg="rosbag" type="record" name="can_record"
-    args="record -o /home/master/test_jinbo/data/
-                    /can_dumper_node/can_data
-                    /can_dumper_node/can_visualization"/>
+  <node pkg="can_dumper" type="can_dumper_vis" name="can_dumper_vis" output="screen"/>
 
 </launch>
