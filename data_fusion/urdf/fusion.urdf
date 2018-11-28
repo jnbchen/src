@@ -82,43 +82,43 @@
   <link name="ContiSSR208_3"/>
   <link name="ContiARS408"/>
 
-  <joint name="lidar_ibeo" type="continuous">
+  <joint name="lidar_ibeo" type="fixed">
     <parent link="vehicle"/>
     <child link="ibeo"/>
     <origin xyz="0 0 0 " rpy = "0 0 0"/>
   </joint>
 
-  <joint name="lidar_velo" type="continuous">
+  <joint name="lidar_velo" type="fixed">
     <parent link="vehicle"/>
     <child link="velodyne"/>
     <origin xyz="0.88 0 2.166 " rpy = "0 0 -1.57075"/>
   </joint>
 
-  <joint name="radar_0" type="continuous">
+  <joint name="radar_0" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiSSR208_0"/>
     <origin xyz="3.514 0.669 0.16 " rpy = "0 0 -0.6108"/>
   </joint>
 
-  <joint name="radar_1" type="continuous">
+  <joint name="radar_1" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiSSR208_1"/>
     <origin xyz="3.515 -0.669 0.16 " rpy = "0 0 0.6108"/>
   </joint>
 
-  <joint name="radar_2" type="continuous">
+  <joint name="radar_2" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiSSR208_2"/>
     <origin xyz="-0.808 0.743 0.326 " rpy = "0 0 -2.408"/>
   </joint>
 
-  <joint name="radar_3" type="continuous">
+  <joint name="radar_3" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiSSR208_3"/>
     <origin xyz="-0.808 -0.743 0.326 " rpy = "0 0 2.408"/>
   </joint>
 
-  <joint name="radar" type="continuous">
+  <joint name="radar" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiARS408"/>
     <origin xyz="3.617 -0.009 0.431 " rpy = "0 0 0"/>

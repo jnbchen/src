@@ -61,7 +61,7 @@ class can_visualizer(object):
                 self.text_.header.frame_id = track.radar_type
                 self.text_.ns = track.radar_type + '-id'
                 self.text_.pose.position = p
-                self.text_.text = 'id-' + str(track.id) + '/Vx-' + str(relative_velocity_x) + '/Vy-' + str(relative_velocity_x)
+                self.text_.text = 'id-' + str(track.id) + '/Vx-' + str(track.relative_velocity_x) + '/Vy-' + str(track.relative_velocity_x)
                 self.ssr_array_.markers.append(self.text_)
 
         self.pub_ssr_.publish(self.ssr_array_)
@@ -107,7 +107,7 @@ class can_visualizer(object):
                 self.text_.ns = track.radar_type + '-id'
                 self.text_.pose.position.x = track.distance_x
                 self.text_.pose.position.y = track.distance_y
-                self.text_.text = 'id-' + str(track.id) + '/Vx-' + str(relative_velocity_x) + '/Vy-' + str(relative_velocity_x)
+                self.text_.text = 'id-' + str(track.id) + '/Vx-' + str(track.relative_velocity_x) + '/Vy-' + str(track.relative_velocity_x)
                 self.ars_array_.markers.append(self.text_)
 
         self.pub_ars_.publish(self.ars_array_)
