@@ -5,7 +5,7 @@
 
   <!-- node for can dumper -->
   <node pkg="can_dumper" type="can_dumper_node" name="can_dumper_node" output="screen">
-    <param name="collect_interval" value="5" />
+    <param name="collect_interval" value="30" />
     <param name="broadcast_time" value="50" />
     <param name="device_config_file" value="$(find can_dumper)/config/device.conf" />
   </node>

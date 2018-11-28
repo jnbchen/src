@@ -13,7 +13,7 @@ class can_parser(object):
 
     def get_filter(self, channel):
         filter_list = []
-        if channel == 'can0':
+        if channel == 'can5':
             filter_list = [{'can_id':0x60B,'can_mask':0xFFF,'extended':False}, \
                            {'can_id':0x60D,'can_mask':0xFFF,'extended':False}]
         elif channel == 'can1':
