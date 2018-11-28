@@ -12,6 +12,9 @@ uint8 classification
 string radar_type
 bool is_object
 
+uint8 measure_state
+uint8 probolity_of_exist
+
 float32 distance_x
 float32 distance_y
 

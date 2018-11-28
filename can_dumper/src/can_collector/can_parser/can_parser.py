@@ -15,6 +15,7 @@ class can_parser(object):
         filter_list = []
         if channel == 'can5':
             filter_list = [{'can_id':0x60B,'can_mask':0xFFF,'extended':False}, \
+                           {'can_id':0x60C,'can_mask':0xFFF,'extended':False}, \
                            {'can_id':0x60D,'can_mask':0xFFF,'extended':False}]
         elif channel == 'can1':
             filter_list = [{'can_id':0x60C,'can_mask':0xFFF,'extended':False}, \
@@ -22,7 +23,6 @@ class can_parser(object):
         elif channel == 'can2':
             filter_list = [{'can_id':0x62C,'can_mask':0xFFF,'extended':False}, \
                            {'can_id':0x63C,'can_mask':0xFFF,'extended':False}]
-
         return filter_list
 
     def decode(self, frame):

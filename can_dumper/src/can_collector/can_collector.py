@@ -18,7 +18,6 @@ class can_collector(object):
         self.buffer_ = []
         self.routeid = None
         self.topic_ = True
-        self.list_ = [0x60C, 0x61C, 0x62C, 0x63C]
         self.pub_1 = rospy.Publisher('/can_dumper_node/can1_data', RadarArray, queue_size=1000)
         self.pub_2 = rospy.Publisher('/can_dumper_node/can2_data', RadarArray, queue_size=1000)
         self.pub_5 = rospy.Publisher('/can_dumper_node/can5_data', RadarArray, queue_size=1000)
@@ -72,55 +71,69 @@ class can_collector(object):
                             break
 
     def build_msg(self):
+        buffer = {}
         for i in range(len(self.buffer_)):
             r = self.buffer_[i]
             radar = Radar()
-            if r['id'] in self.list_ and r['channel'] == 'can1':
+            if (r['id'] == 0x60C or r['id'] == 0x61C) and r['channel'] == 'can1':
                 device = str((r['id']&0x0F0)>>4)
                 radar.id = r['Track_ID']
                 radar.radar_type = 'ContiSSR208_' + device
                 #print(radar.radar_type)
                 radar.is_object = False
+                radar.classification = 0xFF
                 radar.distance_x = r['Track_LatDispl']
                 radar.distance_y = r['Track_LongDispl']
                 radar.relative_velocity_x = r['Track_VrelLat']
                 radar.relative_velocity_y = r['Track_VrelLong']
-
                 self.radar_array_1.header.stamp = rospy.get_rostime()
                 self.radar_array_1.header.frame_id = 'radar'
                 self.radar_array_1.radar_array.append(radar)
-            if r['id'] in self.list_ and r['channel'] == 'can2':
+            elif (r['id'] == 0x62C or r['id'] == 0x63C) and r['channel'] == 'can2':
                 device = str((r['id']&0x0F0)>>4)
                 radar.id = r['Track_ID']
                 radar.radar_type = 'ContiSSR208_' + device
                 #print(radar.radar_type)
                 radar.is_object = False
+                radar.classification = 0xFF
                 radar.distance_x = r['Track_LatDispl']
                 radar.distance_y = r['Track_LongDispl']
                 radar.relative_velocity_x = r['Track_VrelLat']
                 radar.relative_velocity_y = r['Track_VrelLong']
-
                 self.radar_array_2.header.stamp = rospy.get_rostime()
                 self.radar_array_2.header.frame_id = 'radar'
                 self.radar_array_2.radar_array.append(radar)
-            elif r['id'] == 0x60B and r['channel'] == 'can5':
-                radar.id = r['Obj_ID']
-                radar.radar_type = 'ContiARS408'
-                radar.is_object = False
-                radar.distance_x = r['Obj_DistLat']
-                radar.distance_y = r['Obj_DistLong']
-                radar.relative_velocity_x = r['Obj_VrelLat']
-                radar.relative_velocity_y = r['Obj_VrelLong']
-                #print(radar)
+            elif (r['id'] == 0x60B or r['id'] == 0x60C or r['id'] == 0x60D) and r['channel'] == 'can5':
+                id = r['Obj_ID']
+                if id not in buffer.keys():
+                    buffer[id] = r
+                else:
+                    buffer[radar.id].update(r)
+                    radar.is_object = False
+                    if len(buffer[radar.id].keys()) == 24:
+                        radar.id = r['Obj_ID']
+                        radar.radar_type = 'ContiARS408'
+                        radar.is_object = True
+                        radar.distance_x = r['Obj_DistLat']
+                        radar.distance_y = r['Obj_DistLong']
+                        radar.relative_velocity_x = r['Obj_VrelLat']
+                        radar.relative_velocity_y = r['Obj_VrelLong']
+                        radar.probolity_of_exist = r['Obj_ProbOfExist']
+                        radar.classification = r['Obj_Class']
+                        radar.measure_state = r['Obj_MeasState']
+                        radar.object_size_x = r['Obj_Length']
+                        radar.object_size_x = r['Obj_Width']
+                        radar.angle = r['Obj_OrientationAngle']
+                        radar.name = self.switch(radar.classification).get('name')
+                        radar.r = self.switch(radar.classification).get('r')
+                        radar.g = self.switch(radar.classification).get('g')
+                        radar.b = self.switch(radar.classification).get('b')
+                        radar.a = self.switch(radar.classification).get('a')
+                        print(radar)
 
-            #self.radar_.name = self.switch(var).get('name')
-            #self.radar_.r = self.switch(var).get('r')
-            #self.radar_.g = self.switch(var).get('g')
-            #self.radar_.b = self.switch(var).get('b')
-            #self.radar_.a = self.switch(var).get('a')
-                self.radar_array_5.header.stamp = rospy.get_rostime()
-                self.radar_array_5.header.frame_id = 'radar'
-                self.radar_array_5.radar_array.append(radar)
+                        self.radar_array_5.header.stamp = rospy.get_rostime()
+                        self.radar_array_5.header.frame_id = 'radar'
+                        self.radar_array_5.radar_array.append(radar)
 
     def switch(self, var):
         return {
