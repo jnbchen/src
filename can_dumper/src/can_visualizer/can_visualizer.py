@@ -90,7 +90,9 @@ class can_visualizer(object):
         self.point_.points.append(p)
 
     def start(self):
-        rospy.Subscriber('/can_dumper_node/can_data', RadarArray, self.callback, queue_size=20)
+        rospy.Subscriber('/can_dumper_node/can1_data', RadarArray, self.callback, queue_size=20)
+        rospy.Subscriber('/can_dumper_node/can2_data', RadarArray, self.callback, queue_size=20)
+        rospy.Subscriber('/can_dumper_node/can5_data', RadarArray, self.callback, queue_size=1000)
         rate = rospy.Rate(30)
         rate.sleep()
         rospy.spin()
