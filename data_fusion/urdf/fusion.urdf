@@ -1,0 +1,128 @@
+<robot name="test_car">
+  <link name="vehicle">  
+    <visual>  
+       <geometry>  
+         <box size="4.69 2.13 0.6"/>  
+       </geometry>  
+       <origin rpy="0 0 0" xyz="1.335 0 0.7"/>  
+       <material name="white">  
+         <color rgba="1 1 1 1"/>  
+       </material>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_1">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="3.0 0.9 0.4"/>  
+      <material name="black">  
+        <color rgba="0 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_2">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="-0.4 0.9 0.4"/>  
+      <material name="black"/>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_3">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="3.0 -0.9 0.4"/>  
+      <material name="black"/>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_4">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="-0.4 -0.9 0.4"/>  
+      <material name="black"/>  
+    </visual>  
+  </link>
+  
+  <joint name="joint_base_wheel1" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_1"/>  
+  </joint>  
+  
+  <joint name="joint_base_wheel2" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_2"/>  
+  </joint>  
+  
+  <joint name="joint_base_wheel3" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_3"/>  
+  </joint>  
+  
+  <joint name="joint_base_wheel4" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_4"/>  
+  </joint>
+
+
+  <link name="velodyne"/>
+  <link name="ibeo"/>
+  <link name="ContiSSR208_0"/>
+  <link name="ContiSSR208_1"/>
+  <link name="ContiSSR208_2"/>
+  <link name="ContiSSR208_3"/>
+  <link name="ContiARS408"/>
+
+  <joint name="lidar_ibeo" type="fixed">
+    <parent link="vehicle"/>
+    <child link="ibeo"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
+  </joint>
+
+  <joint name="lidar_velo" type="fixed">
+    <parent link="vehicle"/>
+    <child link="velodyne"/>
+    <origin xyz="0.88 0 2.166 " rpy = "0 0 -1.57075"/>
+  </joint>
+
+  <joint name="radar_0" type="fixed">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_0"/>
+    <origin xyz="3.514 0.669 0.16 " rpy = "0 0 0.6108"/>
+  </joint>
+
+  <joint name="radar_1" type="fixed">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_1"/>
+    <origin xyz="3.515 -0.669 0.16 " rpy = "0 0 -0.6108"/>
+  </joint>
+
+  <joint name="radar_2" type="fixed">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_2"/>
+    <origin xyz="-0.808 0.743 0.326 " rpy = "0 0 -2.408"/>
+  </joint>
+
+  <joint name="radar_3" type="fixed">
+    <parent link="vehicle"/>
+    <child link="ContiSSR208_3"/>
+    <origin xyz="-0.808 -0.743 0.326 " rpy = "0 0 2.408"/>
+  </joint>
+
+  <joint name="radar" type="fixed">
+    <parent link="vehicle"/>
+    <child link="ContiARS408"/>
+    <origin xyz="3.95 0 0.431 " rpy = "0 0 -1.57075"/>
+  </joint>
+
+</robot>  
+

@@ -1,0 +1,39 @@
+依赖库：
+1. 安装boost
+   1.65.0 测试可用，更高版本没试过。
+2. 安装IbeoSDK
+   链接: https://pan.baidu.com/s/18hn5_LfFMVrEOn7NKaa56A 
+   提取码: m5bd
+   安装完后在ibeo/src/CMakelist.txt里面把:
+   include_directories(
+   ${catkin_INCLUDE_DIRS}
+   ${PCL_INCLUDE_DIRS}
+   /home/jinbo/IbeoSDK5.2.2/src
+   )
+   set_target_properties(ibeosdk_d 
+   PROPERTIES IMPORTED_LOCATION
+   /home/jinbo/IbeoSDK5.2.2/libs/libibeosdk_d.so)
+   中的绝对路径改为自己的路径...
+
+build:
+1. <your catkin workspace path>/src $ git clone http://gitlab.csvw.com/ChenJinbo/ibeo_had.git
+2. <your catkin workspace path> $ catkin_make
+3. <your catkin workspace path> $ source devel/setup.basch
+
+node说明:
+1. ibeo_had_idc: 读取ibeo官方数据文件格式idc, 发布点云与目标物输出；
+2. ibeo_had_ecu: 监听ibeo ECU数据，发布点云与目标物输出；
+3. ibeo_had_pcd: 读取UISEE离线数据.pcd与.json，发布点云与目标物输出；
+4. ibeo_had_visualizer: 订阅点云与目标物输出，发布可视化图像.
+
+launch说明:
+1. roslaunch ibeo_had visualization_ecu.launch storage_path:="<your storage path>"
+   启动ibeo_had_ecu，ibeo_had_visualizer，RVIZ与rosbag record，监听ECU，实时发布、可视化以及录制数据；
+   
+2. roslaunch ibeo_had visualization_idc.launch filename:="<your .idc file path>"
+   启动ibeo_had_idc，ibeo_had_visualizer，RVIZ与rosbag record，读取idc，回放录制数据；
+
+3. roslaunch ibeo_had object_output.launch storage_path:="<your storage path>"
+   启动ibeo_had_ecu, 发布目标物信息并录制
+
+肯定会存在问题的，所以随便联系我。。。

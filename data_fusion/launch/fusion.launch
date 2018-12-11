@@ -1,0 +1,42 @@
+<!-- -*- mode: XML -*- -->
+<!-- run all nodes for data collection and live display in fake car -->
+
+<launch>
+
+  <!-- declare arguments with default values -->
+  <arg name="device_ip" default="192.168.100.43"/>
+  <arg name="pcap" default=""/>
+  <arg name="model"/> 
+  <arg name="gui" default="False" /> 
+
+  <!-- node for can dumper -->
+  <include file="$(find can_dumper)/launch/six_channels.launch" />
+
+  <!-- node for velodyne -->
+  <include file="$(find velodyne_pointcloud)/launch/64e_points.launch" >
+    <arg name="device_ip" value="$(arg device_ip)"/>
+    <arg name="pcap" value="$(arg pcap)"/>
+  </include>
+
+  <!-- node for ibeo_had -->
+  <include file="$(find ibeo_had)/launch/ecu_listener.launch" />
+
+  <param name="robot_description" textfile="$(find data_fusion)/urdf/fusion.urdf" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="$(arg gui)"/> 
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find data_fusion)/config/fusion.rviz"/>
+
+  <node pkg="rosbag" type="rosbag" name="rosbag" args = "-0 subset
+                                                        /can_dumper_node/can1_data
+                                                        /can_dumper_node/can2_data
+							/can_dumper_node/can5_data
+							/can_dumper_node/can_ssr
+							/can_dumper_node/can_ars
+							/ibeo_listener/ibeo_objects
+							/ibeo_listener/ibeo_points
+							/ibeo_visualizer/ibeo_class
+							/velodyne_points"/>
+</launch>

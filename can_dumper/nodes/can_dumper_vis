@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+
+import can_visualizer, rospy
+
+
+if __name__ == '__main__':
+    rospy.init_node('can_dumper_vis')
+
+    visualizer = can_visualizer.can_visualizer()
+    visualizer.start()

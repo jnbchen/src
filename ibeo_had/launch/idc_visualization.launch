@@ -1,0 +1,24 @@
+<!-- -*- mode: XML -*- -->
+<!-- run all nodes for data collection and live display in fake car -->
+
+<launch>
+
+  <!-- declare arguments with default values -->
+  <arg name="filename" default="/media/jinbo/Work/Data_set/ibeo/20181105-140951.idc"/>
+  <arg name="model"/> 
+  <arg name="gui" default="False" />
+
+  <!-- node for ibeo_had -->
+  <include file="$(find ibeo_had)/launch/idc_parser.launch" >
+    <arg name="filename" value="$(arg filename)" />
+  </include>
+
+  <param name="robot_description" textfile="$(find ibeo_had)/urdf/vehicle.urdf" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="$(arg gui)"/> 
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ibeo_had)/config/visualization_idc.rviz"/>
+
+</launch>

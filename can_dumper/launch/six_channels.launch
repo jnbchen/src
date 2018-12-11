@@ -1,0 +1,19 @@
+<!-- -*- mode: XML -*- -->
+<!-- run web can dumper for can message from mobile eye camera as example -->
+
+<launch>
+
+  <!-- node for can dumper -->
+  <node pkg="can_dumper" type="can_dumper_node" name="can_dumper_node" output="screen">
+    <param name="collect_interval" value="30" />
+    <param name="broadcast_time" value="50" />
+    <param name="device_config_file" value="$(find can_dumper)/config/device.conf" />
+  </node>
+
+  <node pkg="can_dumper" type="can_dumper_vis" name="can_dumper_vis" output="screen">
+    <param name="topic_can0" value="True"/>
+    <param name="topic_can1" value="True"/>
+    <param name="topic_can2" value="True"/>
+    <param name="topic_can5" value="True"/>
+  </node>
+</launch>

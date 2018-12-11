@@ -1,0 +1,28 @@
+<!-- -*- mode: XML -*- -->
+<!-- run all nodes for data collection and live display in fake car -->
+
+<launch>
+
+  <arg name="storage_path" default="/media/jinbo/2d7b915b-39ed-47fe-840c-dc60de1e6f42/Data_set/rosbag/ibeo" /> 
+  <arg name="model"/> 
+  <arg name="gui" default="True" />
+
+  <!-- node for ibeo_had -->
+  <include file="$(find ibeo_had)/launch/ecu_listener.launch" />
+
+  <node pkg="rosbag" type="record" name="ibeo_record"
+    args="record -o $(arg storage_path)
+                    /ibeo_listener/ibeo_points
+                    /ibeo_listener/ibeo_objects
+                    /ibeo_visualizer/ibeo_class 
+                    /ibeo_visualizer/ibeo_box"/>
+
+  <param name="robot_description" textfile="$(find ibeo_had)/urdf/vehicle.urdf" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="$(arg gui)"/> 
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ibeo_had)/config/visualization_ecu.rviz"/>
+
+</launch>

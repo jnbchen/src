@@ -1,0 +1,85 @@
+<robot name="test_car">  
+  <link name="vehicle">  
+    <visual>  
+       <geometry>  
+         <box size="4.69 2.13 0.6"/>  
+       </geometry>  
+       <origin rpy="0 0 0" xyz="1.335 0 0.7"/>  
+       <material name="white">  
+         <color rgba="1 1 1 1"/>  
+       </material>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_1">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="3.0 0.9 0.4"/>  
+      <material name="black">  
+        <color rgba="0 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_2">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="-0.4 0.9 0.4"/>  
+      <material name="black"/>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_3">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="3.0 -0.9 0.4"/>  
+      <material name="black"/>  
+    </visual>  
+  </link>  
+  
+  <link name="wheel_4">  
+    <visual>  
+      <geometry>  
+        <cylinder length="0.3" radius="0.4"/>  
+      </geometry>  
+      <origin rpy="1.57075 0 0" xyz="-0.4 -0.9 0.4"/>  
+      <material name="black"/>  
+    </visual>  
+  </link>
+
+  <link name="ibeo"/>
+
+  <joint name="lidar_ibeo" type="continuous">
+    <parent link="vehicle"/>
+    <child link="ibeo"/>
+    <origin xyz="0 0 0 " rpy = "0 0 0"/>
+  </joint>
+  
+  <joint name="joint_base_wheel1" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_1"/>  
+  </joint>  
+  
+  <joint name="joint_base_wheel2" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_2"/>  
+  </joint>  
+  
+  <joint name="joint_base_wheel3" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_3"/>  
+  </joint>  
+  
+  <joint name="joint_base_wheel4" type="fixed">  
+    <parent link="vehicle"/>  
+    <child link="wheel_4"/>  
+  </joint>
+  
+</robot>  
+
