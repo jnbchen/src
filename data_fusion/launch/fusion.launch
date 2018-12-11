@@ -29,4 +29,14 @@
 
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find data_fusion)/config/fusion.rviz"/>
 
+  <node pkg="rosbag" type="rosbag" name="rosbag" args = "-0 subset
+                                                        /can_dumper_node/can1_data
+                                                        /can_dumper_node/can2_data
+							/can_dumper_node/can5_data
+							/can_dumper_node/can_ssr
+							/can_dumper_node/can_ars
+							/ibeo_listener/ibeo_objects
+							/ibeo_listener/ibeo_points
+							/ibeo_visualizer/ibeo_class
+							/velodyne_points"/>
 </launch>

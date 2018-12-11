@@ -1,4 +1,4 @@
-<robot name="test_car">  
+<robot name="test_car">
   <link name="vehicle">  
     <visual>  
        <geometry>  
@@ -97,13 +97,13 @@
   <joint name="radar_0" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiSSR208_0"/>
-    <origin xyz="3.514 0.669 0.16 " rpy = "0 0 -0.6108"/>
+    <origin xyz="3.514 0.669 0.16 " rpy = "0 0 0.6108"/>
   </joint>
 
   <joint name="radar_1" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiSSR208_1"/>
-    <origin xyz="3.515 -0.669 0.16 " rpy = "0 0 0.6108"/>
+    <origin xyz="3.515 -0.669 0.16 " rpy = "0 0 -0.6108"/>
   </joint>
 
   <joint name="radar_2" type="fixed">
@@ -121,7 +121,7 @@
   <joint name="radar" type="fixed">
     <parent link="vehicle"/>
     <child link="ContiARS408"/>
-    <origin xyz="3.617 -0.009 0.431 " rpy = "0 0 0"/>
+    <origin xyz="3.95 0 0.431 " rpy = "0 0 -1.57075"/>
   </joint>
 
 </robot>  

@@ -44,27 +44,25 @@ class Visualizer
 
   void ObjectClass(std::vector<ibeo_had::Object>::const_iterator msg)
   {
-    marker_.header.stamp = ros::Time::now(); //msg->header.stamp;
+    marker_.header.stamp = ros::Time::now();
     marker_.id = msg->id;
-    marker_.pose.position.x = msg->object_box_center.x;
-    marker_.pose.position.y = msg->object_box_center.y;
+    marker_.pose.position.x = msg->object_pose.x;
+    marker_.pose.position.y = msg->object_pose.y;
     //int certainty = msg->classification_certainty;
     //int class_age = msg->classification_age;
     //std::string txt = msg->text;
     marker_.text = msg->text; //txt+" cr:"+std::to_string(certainty)+" age:"+std::to_string(class_age);
-    marker_.color.r = msg->color.r;
-    marker_.color.g = msg->color.g;
-    marker_.color.b = msg->color.b;
-    marker_.color.a = msg->color.a;
+    marker_.color = msg->color;
   }
   
   void ObjectBox(std::vector<ibeo_had::Object>::const_iterator msg)//ibeo_had::Object* msg)
   {
-    line_strip_.header.stamp = ros::Time::now(); //msg->header.stamp;
+    line_strip_.header.stamp = ros::Time::now();
     line_strip_.id = msg->id+1000;
+
     geometry_msgs::Point p1, p2, p3, p4;
-    float w = 0.5*(msg->object_box_size.x);
-    float l = 0.5*(msg->object_box_size.y);
+    float w = 0.5*(msg->object_box_x);
+    float l = 0.5*(msg->object_box_y);
     p1.x = -w; p1.y = -l;
     p2.x = -w; p2.y = l;
     p3.x = w; p3.y = l;
@@ -75,14 +73,13 @@ class Visualizer
     line_strip_.points.push_back(p3);
     line_strip_.points.push_back(p4);
     line_strip_.points.push_back(p1);
-    line_strip_.pose.position.x = msg->object_box_center.x;
-    line_strip_.pose.position.y = msg->object_box_center.y;
-    line_strip_.pose.orientation.z = sin(0.5*(msg->yaw_angle));
-    line_strip_.pose.orientation.w = cos(0.5*(msg->yaw_angle));
-    line_strip_.color.r = msg->color.r;
-    line_strip_.color.g = msg->color.g;
-    line_strip_.color.b = msg->color.b;
-    line_strip_.color.a = msg->color.a;
+    line_strip_.pose.position.x = msg->object_pose.x;
+    line_strip_.pose.position.y = msg->object_pose.y;
+
+    line_strip_.color = msg->color;
+
+    line_strip_.pose.orientation.z = sin(0.5*(msg->object_pose.theta));
+    line_strip_.pose.orientation.w = cos(0.5*(msg->object_pose.theta));
   }
 
   void Callback(const ibeo_had::ObjectArray::ConstPtr& msg)

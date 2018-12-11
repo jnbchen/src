@@ -8,13 +8,13 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
+  roscpp
   pcl_conversions
   pcl_ros
-  roscpp
   sensor_msgs
   std_msgs
   visualization_msgs
+  message_generation
 )
 
 find_package(PCL 1.2 REQUIRED)
@@ -22,6 +22,7 @@ find_package(PCL 1.2 REQUIRED)
 ## System dependencies are found with CMake's conventions
 find_package(Boost REQUIRED COMPONENTS system)
 
+#add_dependencies(test1 ibeo_had_gencpp)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -55,8 +56,6 @@ find_package(Boost REQUIRED COMPONENTS system)
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  Point2D.msg
-  Color.msg
   Object.msg
   ObjectArray.msg
 )
@@ -81,7 +80,7 @@ generate_messages(
   sensor_msgs
   std_msgs
   visualization_msgs
-  ibeo_had
+  #ibeo_had
 )
 
 ################################################
@@ -114,8 +113,8 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-   LIBRARIES ibeo_had
+   # INCLUDE_DIRS include
+   # LIBRARIES ibeo_had
    CATKIN_DEPENDS # pcl_conversions pcl_ros roscpp sensor_msgs 
    message_runtime
    std_msgs
@@ -129,7 +128,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  # include
+  include
   ${catkin_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS}
   /home/jinbo/IbeoSDK5.2.2/src
@@ -150,10 +149,30 @@ set_target_properties(ibeosdk_d PROPERTIES IMPORTED_LOCATION /home/jinbo/IbeoSDK
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_ecu src/listener.cpp)
-add_executable(${PROJECT_NAME}_idc src/idc_reader.cpp)
-add_executable(${PROJECT_NAME}_pcd src/parser.cpp)
+add_executable(${PROJECT_NAME}_ecu src/AllListener.cpp src/listener.cpp)
+add_dependencies(${PROJECT_NAME}_ecu ${${PROJECT_NAME}_EXPORTED_TARGETS})
+target_link_libraries(${PROJECT_NAME}_ecu
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+  ibeosdk_d
+)
+
+add_executable(${PROJECT_NAME}_idc src/AllListener.cpp src/idc_reader.cpp )
+add_dependencies(${PROJECT_NAME}_idc ${${PROJECT_NAME}_EXPORTED_TARGETS})
+target_link_libraries(${PROJECT_NAME}_idc
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
+  ibeosdk_d
+)
+
+# add_executable(${PROJECT_NAME}_pcd src/parser.cpp)
+
 add_executable(${PROJECT_NAME}_visualizer src/visualizer.cpp)
+add_dependencies(${PROJECT_NAME}_visualizer ${${PROJECT_NAME}_EXPORTED_TARGETS})
+target_link_libraries(${PROJECT_NAME}_visualizer
+   ${catkin_LIBRARIES}
+   ${PCL_LIBRARIES}
+)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -166,28 +185,6 @@ add_executable(${PROJECT_NAME}_visualizer src/visualizer.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_ecu
-  ${catkin_LIBRARIES}
-  ${PCL_LIBRARIES}
-  ibeosdk_d
-)
-
-target_link_libraries(${PROJECT_NAME}_idc
-  ${catkin_LIBRARIES}
-  ${PCL_LIBRARIES}
-  ibeosdk_d
-)
-
-target_link_libraries(${PROJECT_NAME}_pcd
-   ${catkin_LIBRARIES}
-   ${PCL_LIBRARIES}
-)
-
-target_link_libraries(${PROJECT_NAME}_visualizer
-   ${catkin_LIBRARIES}
-   ${PCL_LIBRARIES}
-)
-
 
 #############
 ## Install ##

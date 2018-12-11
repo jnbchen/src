@@ -1,0 +1,15 @@
+<!-- -*- mode: XML -*- -->
+<!-- run all nodes for data collection and live display in fake car -->
+
+<launch>
+  <arg name="model"/> 
+  <arg name="gui" default="False" /> 
+
+  <param name="robot_description" textfile="$(find data_fusion)/urdf/fusion.urdf" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="$(arg gui)"/> 
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find data_fusion)/config/fusion.rviz"/>
+</launch>

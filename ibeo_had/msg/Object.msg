@@ -13,17 +13,17 @@ uint8 classification
 uint8 classification_certainty
 uint32 classification_age
 
-Point2D object_box_center
-Point2D object_box_size
+geometry_msgs/Pose2D object_pose
+geometry_msgs/Polygon contour
 
-Color color
+std_msgs/ColorRGBA color
 string text
 
-float32 yaw_angle
+float32 object_box_x
+float32 object_box_y
 
-Point2D[] contour
+float32 absolute_velocity_x
+float32 absolute_velocity_y
 
-Point2D absolute_velocity
-Point2D relative_velocity
-
-
+float32 relative_velocity_x
+float32 relative_velocity_y

@@ -6,7 +6,7 @@
   <!-- declare arguments with default values -->
   <arg name="filename" default="/media/jinbo/Work/Data_set/ibeo/20181105-140951.idc"/>
   <arg name="model"/> 
-  <arg name="gui" default="True" />
+  <arg name="gui" default="False" />
 
   <!-- node for ibeo_had -->
   <include file="$(find ibeo_had)/launch/idc_parser.launch" >
