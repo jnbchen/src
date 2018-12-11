@@ -54,6 +54,7 @@ void AllListener::onData(const ScanEcu* const scan)
 
 void AllListener::onData(const ObjectListEcuEt* const objectList)
 {
+    // logInfo << "ObjectListEcuEt " << std::endl;
     object_array_.objects.clear();
     for (auto iter=objectList->getObjects().begin(); iter!=objectList->getObjects().end(); iter++)
     {
@@ -103,6 +104,11 @@ void AllListener::onData(const ObjectListEcuEt* const objectList)
     //std::cout << "i have published a object array msg." << std::endl;
 }
 //==========================================================
+
+void AllListener::onData(const VehicleStateBasicEcu2808* const vsb)
+{
+    // Vehicle State here, you can do it better!
+}
 
 void AllListener::SetColor(int classification)
 {

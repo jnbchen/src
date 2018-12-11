@@ -20,7 +20,7 @@ class Visualizer
   public:
   Visualizer(ros::NodeHandle nh, float text_size, float box_size): node_(nh)
   {
-    pub_class_ = nh.advertise <visualization_msgs::MarkerArray> ("ibeo_class", 10);
+    pub_class_ = nh.advertise <visualization_msgs::MarkerArray> ("ibeo_class", 1);
 
     marker_.header.frame_id = "ibeo";
     marker_.ns = "class";
@@ -118,7 +118,7 @@ main (int argc, char** argv)
   nh.param<int>("rate", rate, 30); 
 
   Visualizer visualizer(nh, text_size, box_size);
-  ros::Subscriber sub = nh.subscribe(sub_topic, 10, &Visualizer::Callback, &visualizer);
+  ros::Subscriber sub = nh.subscribe(sub_topic, 1, &Visualizer::Callback, &visualizer);
   ros::Rate loop_rate(rate);
   
   //ros::spin();

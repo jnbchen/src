@@ -14,7 +14,8 @@
 using namespace ibeosdk;
 
 class AllListener : public ibeosdk::DataListener<ibeosdk::ScanEcu>,
-                       public ibeosdk::DataListener<ObjectListEcuEt>
+                    public ibeosdk::DataListener<ObjectListEcuEt>,
+                    public ibeosdk::DataListener<VehicleStateBasicEcu2808>
 {
   public:
     virtual ~AllListener() {}
@@ -37,11 +38,13 @@ class AllListener : public ibeosdk::DataListener<ibeosdk::ScanEcu>,
         count_ = 0;
         pub_points_ = nh.advertise<sensor_msgs::PointCloud2>("ibeo_points", 1);
         pub_objects_ = nh.advertise<ibeo_had::ObjectArray>("ibeo_objects", 1);
+        //pub_pose_ = nh.
     }
 
     //========================================
     virtual void onData(const ScanEcu* const);
 	virtual void onData(const ObjectListEcuEt* const);
+    virtual void onData(const VehicleStateBasicEcu2808* const);
     void SetColor(int);
 
 }; //AllListener

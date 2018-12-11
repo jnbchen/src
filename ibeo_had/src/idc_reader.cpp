@@ -2,7 +2,6 @@
 #include <string>
 
 #include <ibeosdk/devices/IdcFile.hpp>
-
 #include <AllListener.h>
 
 
