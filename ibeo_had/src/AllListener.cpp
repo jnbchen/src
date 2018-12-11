@@ -43,8 +43,8 @@ void AllListener::onData(const ScanEcu* const scan)
         pcl::toROSMsg(*scan_xyzirl_, scan_points);
         scan_points.header.frame_id = "ibeo";
 
-        double time_stamp = (scan->getStartTimestamp().toPtime()-utc_epoch).total_microseconds()/(double)(1000*1000);
-        scan_points.header.stamp = ros::Time(time_stamp);
+        //double time_stamp = (scan->getStartTimestamp().toPtime()-utc_epoch).total_microseconds()/(double)(1000*1000);
+        scan_points.header.stamp = ros::Time::now();
         pub_points_.publish(scan_points);
 
         scan_xyzirl_.reset (new pcl::PointCloud<PointXYZIRL>);
@@ -98,8 +98,8 @@ void AllListener::onData(const ObjectListEcuEt* const objectList)
         }
     }
     object_array_.header.frame_id = "ibeo";
-    double time_stamp = (objectList->getTimestamp().toPtime()-utc_epoch).total_microseconds()/(double)(1000*1000);
-    object_array_.header.stamp = ros::Time(time_stamp);
+    //double time_stamp = (objectList->getTimestamp().toPtime()-utc_epoch).total_microseconds()/(double)(1000*1000);
+    object_array_.header.stamp = ros::Time::now();
     pub_objects_.publish(object_array_);
     //std::cout << "i have published a object array msg." << std::endl;
 }
