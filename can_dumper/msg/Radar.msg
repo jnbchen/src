@@ -15,10 +15,10 @@ bool is_object
 
 uint8 measure_state
 uint8 probolity_of_exist
+
 float32 rcs_value
 
-float32 distance_x
-float32 distance_y
+geometry_msgs/Pose2D pose
 
 float32 relative_velocity_x
 float32 relative_velocity_y
@@ -26,13 +26,10 @@ float32 relative_velocity_y
 float32 object_size_x
 float32 object_size_y
 
-float32 angle
 float32 lifetime
 
 string  name
-float32  r
-float32  g
-float32  b
-float32  a
+std_msgs/ColorRGBA color
+
 
 

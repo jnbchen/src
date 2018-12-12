@@ -32,7 +32,7 @@ void AllListener::onData(const ScanEcu* const scan)
             xyzirl.intensity = points[index].getEchoPulseWidth();
             xyzirl.ring = points[index].getLayer();
             xyzirl.label = flag;
-
+            //logInfo << flag << std::endl;
             scan_xyzirl_->push_back(xyzirl);
         }
     }
