@@ -1,0 +1,19 @@
+2018.12.12
+******************************************************************************
+1. 采集can数据需通过can卡，参考UISEE的how-to.md中的两条：
+   - Contributing rosdep Rules
+   - Installation of can driver and can utitlity tools
+   安装好peak-can卡驱动, 依赖库python-ca和python-cantools，
+   * IPC上已配置好，可直接运行;
+
+2. 目前采集了ContiSSR_208, ContiARS_408数据，如需更多传感器数据，可以依照添加, 
+   添加前明确传感器在哪条can线上，对应的dbc文件以及你需要的报文信息;
+
+3. 编译与运行，虽然目前没有加上6个channel：
+   catkin_make
+   catkin_make install
+   roslaunch can_dumper six_channels.launch
+
+4. ContiSSR_208, ContiARS_408的数据较为原始，数据量比较大，需要处理；
+
+5. 还未验证，雷达是否获取了车速信息，对输出目标速度进行了补偿。
