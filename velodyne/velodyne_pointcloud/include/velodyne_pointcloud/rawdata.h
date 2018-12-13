@@ -179,10 +179,18 @@ namespace velodyne_rawdata
     void unpack_vlp16(const velodyne_msgs::VelodynePacket &pkt, DataContainerBase& data);
 
     /** in-line test whether a point is in range */
-    bool pointInRange(float range)
+    // bool pointInRange(float range)
+    // {
+    //   return (range >= config_.min_range
+    //           && range <= config_.max_range);
+    // }
+    /* modified inrange function to remove points inside car body */
+    bool pointInRange(float x_coord, float y_coord, float z_coord, float range)
     {
-      return (range >= config_.min_range
-              && range <= config_.max_range);
+      if (range<config_.min_range || range>config_.max_range) return false;
+      else if (x_coord<1.1 && x_coord>-1.1 && y_coord<3.0 && y_coord>-2.0)
+        return false;
+      else return true;
     }
   };
 
