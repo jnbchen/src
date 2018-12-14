@@ -287,7 +287,7 @@ namespace velodyne_rawdata
           intensity = (intensity < min_intensity) ? min_intensity : intensity;
           intensity = (intensity > max_intensity) ? max_intensity : intensity;
   
-          if (pointInRange(distance)) {
+          if (pointInRange(x_coord, y_coord, z_coord, distance)) {
             data.addPoint(x_coord, y_coord, z_coord, corrections.laser_ring, raw->blocks[i].rotation, distance, intensity);
           }
         }
@@ -470,7 +470,7 @@ namespace velodyne_rawdata
             intensity = (intensity < min_intensity) ? min_intensity : intensity;
             intensity = (intensity > max_intensity) ? max_intensity : intensity;
     
-            if (pointInRange(distance)) {    
+            if (pointInRange(x_coord, y_coord, z_coord, distance)) {    
               data.addPoint(x_coord, y_coord, z_coord, corrections.laser_ring, azimuth_corrected, distance, intensity);
             }
           }
