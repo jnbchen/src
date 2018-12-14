@@ -131,12 +131,12 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS}
-  /home/jinbo/IbeoSDK5.2.2/src
+  /home/jinbo/Library/IbeoSDK5.2.2/src
 )
 
 ## Declare a C++ library
 add_library(ibeosdk_d SHARED IMPORTED)
-set_target_properties(ibeosdk_d PROPERTIES IMPORTED_LOCATION /home/jinbo/IbeoSDK5.2.2/libs/libibeosdk_d.so)
+set_target_properties(ibeosdk_d PROPERTIES IMPORTED_LOCATION /home/jinbo/Library/IbeoSDK5.2.2/libs/libibeosdk_d.so)
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/ibeo_had.cpp
 # )
