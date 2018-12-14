@@ -8,6 +8,7 @@ uint8 TRUCK=6
 
 uint16 id
 uint32 age
+uint32 flag
 
 uint8 classification
 uint8 classification_certainty

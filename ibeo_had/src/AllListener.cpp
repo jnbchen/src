@@ -59,7 +59,7 @@ void AllListener::onData(const ObjectListEcuEt* const objectList)
     for (auto iter=objectList->getObjects().begin(); iter!=objectList->getObjects().end(); iter++)
     {
         unsigned int flag = iter->getFlags();
-        if(flag>>7&1 == 1)
+        if(flag>>8 == 1 && flag>>6&3 != 0)
         {
         object_.id = iter->getObjectId();
         object_.age = iter->getObjectAge();
@@ -68,6 +68,7 @@ void AllListener::onData(const ObjectListEcuEt* const objectList)
 
         object_.classification_certainty = iter->getClassCertainty();
         object_.classification_age = iter->getClassAge();
+        object_.flag = flag;
 
         object_.object_pose.x = iter->getObjBoxCenter().getX();
         object_.object_pose.y = iter->getObjBoxCenter().getY();
