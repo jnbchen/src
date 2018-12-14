@@ -5,17 +5,21 @@
 
   <arg name="storage_path" default="/media/jinbo/2d7b915b-39ed-47fe-840c-dc60de1e6f42/Data_set/rosbag/ibeo" /> 
   <arg name="model"/> 
-  <arg name="gui" default="True" />
+  <arg name="gui" default="False" />
+  <arg name="sub_topic" value="/ibeo_listener/ibeo_objects" />
 
   <!-- node for ibeo_had -->
   <include file="$(find ibeo_had)/launch/ecu_listener.launch" />
+
+  <include file="$(find ibeo_had)/launch/visualization.launch" />
+    <param name="sub_topic" value="$(arg sub_topic)"/>
+  </include>
 
   <node pkg="rosbag" type="record" name="ibeo_record"
     args="record -o $(arg storage_path)
                     /ibeo_listener/ibeo_points
                     /ibeo_listener/ibeo_objects
-                    /ibeo_visualizer/ibeo_class 
-                    /ibeo_visualizer/ibeo_box"/>
+                    /ibeo_visualizer/ibeo_class "/>
 
   <param name="robot_description" textfile="$(find ibeo_had)/urdf/vehicle.urdf" />
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">

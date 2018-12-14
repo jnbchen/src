@@ -6,21 +6,10 @@
   <arg name="filename" default="/media/jinbo/2d7b915b-39ed-47fe-840c-dc60de1e6f42/Data_set/idc/20181030-170255.idc"/>
   <arg name="rate" default="10" />
 
-  <arg name="sub_topic" default="/idc_reader/ibeo_objects" />
-  <arg name="text_size" default="1" />
-  <arg name="box_size" default="0.2" />
-
   <!-- node for HAD -->
   <node pkg="ibeo_had" type="ibeo_had_idc" name="idc_reader">
     <param name="filename" value="$(arg filename)" />
     <param name="rate" value="$(arg rate)"/>
-  </node>
-
-  <node pkg="ibeo_had" type="ibeo_had_visualizer" name="ibeo_visualizer" output="screen">
-    <param name="rate" value="$(arg rate)"/>
-    <param name="sub_topic" value="$(arg sub_topic)"/>
-    <param name="text_size" value="$(arg text_size)"/>
-    <param name="box_size" value="$(arg box_size)"/>
   </node>
 
 </launch>

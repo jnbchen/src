@@ -7,10 +7,15 @@
   <arg name="filename" default="/media/jinbo/Work/Data_set/ibeo/20181105-140951.idc"/>
   <arg name="model"/> 
   <arg name="gui" default="False" />
+  <arg name="sub_topic" value="/idc_reader/ibeo_objects" />
 
   <!-- node for ibeo_had -->
   <include file="$(find ibeo_had)/launch/idc_parser.launch" >
     <arg name="filename" value="$(arg filename)" />
+  </include>
+
+  <include file="$(find ibeo_had)/launch/visualization.launch" />
+    <param name="sub_topic" value="$(arg sub_topic)"/>
   </include>
 
   <param name="robot_description" textfile="$(find ibeo_had)/urdf/vehicle.urdf" />

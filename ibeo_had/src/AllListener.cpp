@@ -59,7 +59,7 @@ void AllListener::onData(const ObjectListEcuEt* const objectList)
     for (auto iter=objectList->getObjects().begin(); iter!=objectList->getObjects().end(); iter++)
     {
         unsigned int flag = iter->getFlags();
-        if(flag>>8 == 1 && flag>>6&3 != 0)
+        if(flag>>8 == 1)
         {
         object_.id = iter->getObjectId();
         object_.age = iter->getObjectAge();
